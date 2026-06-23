@@ -1170,7 +1170,8 @@
     <p class="hda-modal-hint">
       엑셀/표에서 복사한 텍스트를 그대로 붙여넣으세요. 한 줄에
       <code>날짜 · 팀 · MD · 과금 · 상품코드 · 상품명</code> 순서이며,
-      날짜(예: <code>6.22(월)</code>)는 첫 항목에만 있으면 됩니다. 입력 내용은 이 브라우저에 저장됩니다.
+      날짜(예: <code>6.22(월)</code>)는 첫 항목에만 있으면 됩니다.
+      <b>화면에는 상품명만 표시되며, 팀·MD·과금·상품코드는 저장되지 않습니다.</b>
     </p>
     <textarea id="hdaRegionInput" class="hda-modal-textarea" spellcheck="false"
       placeholder="6.22(월)&#9;멀티커머스&#9;나영지&#9;정률&#9;2249189203&#9;[퀸이즈] 조비 오버핏 ..."></textarea>
@@ -1908,7 +1909,8 @@ function hdaParseRegionText(text, fallbackYear) {
       md   = cells[1] || '';
       fee  = cells[2] || '';
     }
-    out[curDate].push({ team, md, fee, code, product });
+    // 민감정보(팀/MD/과금/상품코드)는 위치 파악에만 쓰고 저장하지 않음 — 상품명만 보관
+    out[curDate].push({ product });
   }
   return out;
 }
@@ -1924,12 +1926,10 @@ function hdaSaveRegionStore(store) {
   catch (e) { alert('이 브라우저에 저장할 수 없습니다(저장공간/권한). 화면에는 표시되지만 새로고침 시 사라질 수 있어요.'); }
 }
 // 저장 구조: { raw: "<원문 텍스트>", byDate: { 'YYYY-MM-DD': [...] } }
-let _hdaRegionStore = { raw: '', byDate: {} };
+let _hdaRegionStore = { byDate: {} };
 
 function hdaFeeClass(fee) {
-  if (!fee) return '';
-  if (fee.includes('정률')) return 'fee-jr';
-  if (fee.includes('광고')) return 'fee-ad';
+  // (미사용) 과금 유형은 더 이상 화면/저장에 쓰지 않음
   return '';
 }
 
@@ -1977,15 +1977,10 @@ function hdaRenderRegionCol(dateStr) {
   }
   let html = '';
   for (const it of items) {
-    const feeCls = hdaFeeClass(it.fee);
+    if (!it.product) continue;
     html += '<div class="hda-item" style="border-left-color: var(--hda-region);">' +
-            `<div class="hda-title">${escapeHtml(it.product || '')}</div>` +
-            '<div class="hda-meta">' +
-            (it.team ? `<span class="hda-tag team">${escapeHtml(it.team)}</span>` : '') +
-            (it.md ? `<span class="hda-tag md">${escapeHtml(it.md)}</span>` : '') +
-            (it.fee ? `<span class="hda-tag ${feeCls}">${escapeHtml(it.fee)}</span>` : '') +
-            (it.code ? `<span class="hda-tag code">${escapeHtml(it.code)}</span>` : '') +
-            '</div></div>';
+            `<div class="hda-title">${escapeHtml(it.product)}</div>` +
+            '</div>';
   }
   return html;
 }
@@ -2009,7 +2004,8 @@ async function hdaRefresh(dateStr) {
 }
 
 function hdaOpenModal() {
-  document.getElementById('hdaRegionInput').value = _hdaRegionStore.raw || '';
+  // 원문은 저장하지 않으므로 항상 빈 입력창으로 시작
+  document.getElementById('hdaRegionInput').value = '';
   document.getElementById('hdaRegionModal').hidden = false;
 }
 function hdaCloseModal() {
@@ -2018,7 +2014,8 @@ function hdaCloseModal() {
 function hdaSaveFromModal() {
   const raw = document.getElementById('hdaRegionInput').value;
   const byDate = hdaParseRegionText(raw, new Date(hdaCurrentDate + 'T00:00:00').getFullYear());
-  _hdaRegionStore = { raw, byDate };
+  // 원문(raw)은 민감정보를 포함하므로 저장하지 않음 — 파싱된 상품명만 보관
+  _hdaRegionStore = { byDate };
   hdaSaveRegionStore(_hdaRegionStore);
   hdaCloseModal();
   // 저장 후 현재 날짜 데이터영역만 다시 그림
@@ -2034,7 +2031,7 @@ function hdaSaveFromModal() {
 }
 function hdaClearRegion() {
   if (!confirm('저장된 데이터영역 편성을 모두 지울까요?')) return;
-  _hdaRegionStore = { raw: '', byDate: {} };
+  _hdaRegionStore = { byDate: {} };
   hdaSaveRegionStore(_hdaRegionStore);
   document.getElementById('hdaRegionInput').value = '';
   document.getElementById('hdaRegionBody').innerHTML = hdaRenderRegionCol(hdaCurrentDate);
@@ -2145,7 +2142,7 @@ function switchTab(tab) {
   hdaCurrentDate = hsCurrentDate;  // 오늘로 동기화
   _hdaRegionStore = hdaLoadRegionStore();
   if (!_hdaRegionStore || typeof _hdaRegionStore !== 'object' || !('byDate' in _hdaRegionStore)) {
-    _hdaRegionStore = { raw: '', byDate: {} };
+    _hdaRegionStore = { byDate: {} };
   }
   const hdaPicker = document.getElementById('hdaDatePicker');
   hdaPicker.value = hdaCurrentDate;
