@@ -820,6 +820,213 @@
     .hs-prog .hs-title { font-size: 10.5px; }
     .hs-prog .hs-price { font-size: 9.5px; }
   }
+
+  /* ============ 현대홈쇼핑 전체 탭 ============ */
+  #tabHdAll {
+    --hd: #003C82;
+    --hda-live: #2563EB;
+    --hda-data: #7C3AED;
+    --hda-region: #BC6C25;
+    font-family: 'Pretendard', -apple-system, sans-serif;
+  }
+  .hda-wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 14px 24px 60px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    align-items: start;
+  }
+  .hda-col {
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--paper);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+  .hda-col-head {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    padding: 9px 12px;
+    letter-spacing: -0.01em;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+  .hda-col-head.hda-live   { background: var(--hda-live); }
+  .hda-col-head.hda-data   { background: var(--hda-data); }
+  .hda-col-head.hda-region { background: var(--hda-region); }
+
+  .hda-col-body {
+    max-height: calc(100vh - 200px);
+    overflow: auto;
+  }
+
+  .hda-item {
+    border-bottom: 1px solid var(--rule);
+    border-left: 3px solid transparent;
+    padding: 7px 10px 8px 11px;
+  }
+  .hda-item:last-child { border-bottom: none; }
+  .hda-item .hda-time {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+  }
+  .hda-item .hda-time.onair { color: var(--now-accent); }
+  .hda-onair-badge {
+    display: inline-block;
+    margin-left: 6px;
+    font-size: 9px;
+    font-weight: 700;
+    color: #fff;
+    background: var(--now-accent);
+    border-radius: 4px;
+    padding: 1px 5px;
+    vertical-align: middle;
+  }
+  .hda-item .hda-title { font-size: 12px; line-height: 1.45; margin-top: 2px; }
+  .hda-item .hda-brand { color: var(--hd); font-weight: 700; }
+  .hda-item .hda-meta {
+    margin-top: 3px;
+    font-size: 10.5px;
+    color: var(--ink-faint);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+  }
+  .hda-item .hda-price { color: var(--ink); font-weight: 600; }
+  .hda-item .hda-price .won { font-size: 9px; color: var(--ink-faint); margin-left: 1px; }
+  .hda-tag {
+    display: inline-block;
+    font-size: 9.5px;
+    font-weight: 600;
+    border-radius: 4px;
+    padding: 1px 5px;
+  }
+  .hda-tag.team    { background: var(--paper-dim2); color: var(--ink-soft); }
+  .hda-tag.md      { background: #EFF4FF; color: #2563EB; }
+  .hda-tag.fee-jr  { background: #FEF3E2; color: #BC6C25; }   /* 정률 */
+  .hda-tag.fee-ad  { background: #F0F0F4; color: #6B7280; }   /* 광고비 */
+  .hda-tag.code    { color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+
+  .hda-empty {
+    text-align: center;
+    padding: 30px 12px;
+    color: var(--ink-faint);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  .hda-date-group-head {
+    position: sticky;
+    top: 0;
+    background: var(--paper-dim);
+    border-bottom: 1px solid var(--rule);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink-soft);
+    padding: 5px 11px;
+    z-index: 1;
+  }
+
+  .hda-region-tools { padding: 9px 10px; border-top: 1px solid var(--rule); background: var(--paper-dim); }
+  .hda-region-btn {
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid var(--rule);
+    background: #fff;
+    color: var(--ink);
+    border-radius: 7px;
+    padding: 7px 12px;
+    cursor: pointer;
+    width: 100%;
+  }
+  .hda-region-btn:hover { background: var(--paper-dim); }
+  .hda-region-btn.primary { background: var(--brand-blue); color: #fff; border-color: var(--brand-blue); }
+  .hda-region-btn.primary:hover { background: var(--brand-blue-hover); }
+  .hda-region-btn.ghost { color: var(--ink-soft); }
+  .hda-region-btn.primary, .hda-region-btn.ghost { width: auto; }
+
+  .hda-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(16, 24, 40, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    padding: 20px;
+  }
+  .hda-modal[hidden] { display: none; }
+  .hda-modal-box {
+    background: #fff;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 560px;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    max-height: 85vh;
+  }
+  .hda-modal-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--rule);
+    font-size: 14px;
+  }
+  .hda-modal-x {
+    border: none;
+    background: none;
+    font-size: 15px;
+    color: var(--ink-soft);
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+  .hda-modal-x:hover { background: var(--paper-dim); }
+  .hda-modal-hint {
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    margin: 12px 16px 8px;
+  }
+  .hda-modal-hint code {
+    background: var(--paper-dim2);
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-size: 10.5px;
+  }
+  .hda-modal-textarea {
+    margin: 0 16px;
+    min-height: 220px;
+    resize: vertical;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-size: 11.5px;
+    line-height: 1.5;
+  }
+  .hda-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 14px 16px;
+  }
+
+  @media (max-width: 820px) {
+    .hda-wrap {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    .hda-col-body { max-height: 420px; }
+  }
 </style>
 </head>
 <body>
@@ -829,6 +1036,7 @@
   <span class="sub">방송 편성 · 날씨 · 홈쇼핑</span>
   <div class="main-tabs">
     <button id="tabBtnHomeshop" class="active">홈쇼핑</button>
+    <button id="tabBtnHdAll">현대홈쇼핑 전체</button>
     <button id="tabBtnSchedule">편성표</button>
     <button id="tabBtnWeather">날씨</button>
   </div>
@@ -916,6 +1124,62 @@
 <div class="hs-cat-legend" id="hsCatLegend"></div>
 
 <div class="hs-grid-wrap" id="hsGridWrap"></div>
+
+</div>
+
+<!-- ============ 현대홈쇼핑 전체 탭 ============ -->
+<div id="tabHdAll" class="tab-panel">
+
+<div class="hs-controls">
+  <div class="date-nav">
+    <button class="arrow" id="hdaPrevDay" aria-label="이전 날짜">‹</button>
+    <div class="date-display" id="hdaDateDisplay">
+      <span class="date-text" id="hdaDateText">2026-06-21 (일)</span>
+      <i class="cal-icon">📅</i>
+      <input type="date" id="hdaDatePicker">
+    </div>
+    <button class="arrow" id="hdaNextDay" aria-label="다음 날짜">›</button>
+  </div>
+</div>
+
+<div class="hda-wrap">
+  <div class="hda-col">
+    <div class="hda-col-head hda-live">라이브방송</div>
+    <div class="hda-col-body" id="hdaLiveBody"></div>
+  </div>
+  <div class="hda-col">
+    <div class="hda-col-head hda-data">데이터방송</div>
+    <div class="hda-col-body" id="hdaDataBody"></div>
+  </div>
+  <div class="hda-col">
+    <div class="hda-col-head hda-region">데이터영역</div>
+    <div class="hda-col-body" id="hdaRegionBody"></div>
+    <div class="hda-region-tools">
+      <button type="button" id="hdaRegionEditBtn" class="hda-region-btn">✎ 데이터영역 편성 입력</button>
+    </div>
+  </div>
+</div>
+
+<!-- 데이터영역 입력 모달 -->
+<div id="hdaRegionModal" class="hda-modal" hidden>
+  <div class="hda-modal-box">
+    <div class="hda-modal-head">
+      <strong>데이터영역 편성 붙여넣기</strong>
+      <button type="button" id="hdaRegionClose" class="hda-modal-x" aria-label="닫기">✕</button>
+    </div>
+    <p class="hda-modal-hint">
+      엑셀/표에서 복사한 텍스트를 그대로 붙여넣으세요. 한 줄에
+      <code>날짜 · 팀 · MD · 과금 · 상품코드 · 상품명</code> 순서이며,
+      날짜(예: <code>6.22(월)</code>)는 첫 항목에만 있으면 됩니다. 입력 내용은 이 브라우저에 저장됩니다.
+    </p>
+    <textarea id="hdaRegionInput" class="hda-modal-textarea" spellcheck="false"
+      placeholder="6.22(월)&#9;멀티커머스&#9;나영지&#9;정률&#9;2249189203&#9;[퀸이즈] 조비 오버핏 ..."></textarea>
+    <div class="hda-modal-actions">
+      <button type="button" id="hdaRegionClear" class="hda-region-btn ghost">전체 비우기</button>
+      <button type="button" id="hdaRegionSave" class="hda-region-btn primary">저장</button>
+    </div>
+  </div>
+</div>
 
 </div>
 
@@ -1587,9 +1851,198 @@ function renderMonthPickerPanel() {
   });
 }
 
+// ============ 현대홈쇼핑 전체 탭 ============
+let _hdAllTabLoaded = false;
+let hdaCurrentDate = "2026-06-21";
+const HDA_REGION_STORAGE_KEY = "hdhs_data_region_v1";
+
+// --- 데이터영역 텍스트 파싱 ---
+// 입력 형식(탭 또는 다중 공백 구분):
+//   6.22(월)  팀명  MD명  과금  상품코드  상품명
+//   (이어지는 줄)  팀명  MD명  과금  상품코드  상품명   ← 날짜 생략 시 직전 날짜에 누적
+// 날짜는 'M.D(요일)' / 'M.D' / 'YYYY-MM-DD' 형태를 허용한다.
+function hdaParseRegionText(text, fallbackYear) {
+  const year = fallbackYear || (new Date()).getFullYear();
+  const out = {};           // { 'YYYY-MM-DD': [ {team, md, fee, code, product}, ... ] }
+  let curDate = null;
+
+  const dateRe = /^\s*(?:(\d{4})-(\d{1,2})-(\d{1,2})|(\d{1,2})\s*[.\/]\s*(\d{1,2}))\s*(?:\([^)]*\))?\s*$/;
+
+  for (const rawLine of text.split(/\r?\n/)) {
+    if (!rawLine.trim()) continue;
+    // 탭 우선, 없으면 2칸 이상 공백으로 분리
+    let cells = rawLine.includes('\t')
+      ? rawLine.split('\t')
+      : rawLine.split(/ {2,}/);
+    cells = cells.map(c => c.trim()).filter(c => c !== '');
+    if (cells.length === 0) continue;
+
+    // 첫 셀이 날짜면 떼어내고 그 날짜로 전환
+    const m = cells[0].match(dateRe);
+    if (m) {
+      let y, mo, d;
+      if (m[1]) { y = +m[1]; mo = +m[2]; d = +m[3]; }
+      else { y = year; mo = +m[4]; d = +m[5]; }
+      curDate = `${y}-${String(mo).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      if (!out[curDate]) out[curDate] = [];
+      cells = cells.slice(1);
+      if (cells.length === 0) continue; // 날짜만 있는 줄
+    }
+    if (!curDate) continue; // 날짜 헤더가 아직 안 나왔으면 건너뜀
+
+    // 남은 셀에서 상품코드(긴 숫자) 위치를 기준으로 매핑
+    const codeIdx = cells.findIndex(c => /^\d{6,}$/.test(c));
+    let team = '', md = '', fee = '', code = '', product = '';
+    if (codeIdx >= 0) {
+      code = cells[codeIdx];
+      const before = cells.slice(0, codeIdx);
+      product = cells.slice(codeIdx + 1).join(' ');
+      // before = [팀, MD, 과금] 순서를 기대하되 개수 변동에 관대하게
+      team = before[0] || '';
+      md   = before[1] || '';
+      fee  = before[2] || '';
+    } else {
+      // 코드가 없으면: 마지막 셀을 상품명으로, 앞쪽을 팀/MD/과금으로
+      product = cells[cells.length - 1] || '';
+      team = cells[0] || '';
+      md   = cells[1] || '';
+      fee  = cells[2] || '';
+    }
+    out[curDate].push({ team, md, fee, code, product });
+  }
+  return out;
+}
+
+function hdaLoadRegionStore() {
+  try {
+    const raw = localStorage.getItem(HDA_REGION_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch (e) { return {}; }
+}
+function hdaSaveRegionStore(store) {
+  try { localStorage.setItem(HDA_REGION_STORAGE_KEY, JSON.stringify(store)); }
+  catch (e) { alert('이 브라우저에 저장할 수 없습니다(저장공간/권한). 화면에는 표시되지만 새로고침 시 사라질 수 있어요.'); }
+}
+// 저장 구조: { raw: "<원문 텍스트>", byDate: { 'YYYY-MM-DD': [...] } }
+let _hdaRegionStore = { raw: '', byDate: {} };
+
+function hdaFeeClass(fee) {
+  if (!fee) return '';
+  if (fee.includes('정률')) return 'fee-jr';
+  if (fee.includes('광고')) return 'fee-ad';
+  return '';
+}
+
+// HD 한 회사의 live/data 월데이터에서 특정 날짜 추출 (홈쇼핑 탭 캐시 재사용)
+async function hdaLoadHd(bc, dateStr) {
+  return await hsLoadCompanyDate('HD', bc, dateStr); // { programs } | null
+}
+
+function hdaNowMin(dateStr) {
+  const today = toLocalDateStr(new Date());
+  if (dateStr !== today) return null;
+  const now = new Date();
+  return now.getHours() * 60 + now.getMinutes();
+}
+
+function hdaRenderBroadcastCol(data, nowMin) {
+  const programs = (data && data.programs) ? data.programs : [];
+  if (programs.length === 0) {
+    return '<div class="hda-empty">이 날짜의 편성 데이터가 없습니다.</div>';
+  }
+  let html = '';
+  for (const p of programs) {
+    let onair = false;
+    if (nowMin !== null && p.start && p.end) {
+      let s = hsTimeToMin(p.start), e = hsTimeToMin(p.end);
+      if (e <= s) e += 1440;
+      if (nowMin >= s && nowMin < e) onair = true;
+    }
+    const brandHtml = p.brand ? `<span class="hda-brand">${escapeHtml(p.brand)}</span> ` : '';
+    const priceHtml = hsFormatPrice(p.price).replace('hs-price', 'hda-price');
+    html += '<div class="hda-item" style="border-left-color:' + hsCategoryColor(p.category) + ';">' +
+            `<div class="hda-time${onair ? ' onair' : ''}">${escapeHtml(p.start||'')}–${escapeHtml(p.end||'')}` +
+            (onair ? '<span class="hda-onair-badge">방송중</span>' : '') + '</div>' +
+            `<div class="hda-title">${brandHtml}${escapeHtml(p.product || '')}</div>` +
+            (priceHtml ? `<div class="hda-meta">${priceHtml}</div>` : '') +
+            '</div>';
+  }
+  return html;
+}
+
+function hdaRenderRegionCol(dateStr) {
+  const items = (_hdaRegionStore.byDate && _hdaRegionStore.byDate[dateStr]) || [];
+  if (items.length === 0) {
+    return '<div class="hda-empty">이 날짜의 데이터영역 편성이 없습니다.<br>아래 버튼으로 편성표를 붙여넣어 주세요.</div>';
+  }
+  let html = '';
+  for (const it of items) {
+    const feeCls = hdaFeeClass(it.fee);
+    html += '<div class="hda-item" style="border-left-color: var(--hda-region);">' +
+            `<div class="hda-title">${escapeHtml(it.product || '')}</div>` +
+            '<div class="hda-meta">' +
+            (it.team ? `<span class="hda-tag team">${escapeHtml(it.team)}</span>` : '') +
+            (it.md ? `<span class="hda-tag md">${escapeHtml(it.md)}</span>` : '') +
+            (it.fee ? `<span class="hda-tag ${feeCls}">${escapeHtml(it.fee)}</span>` : '') +
+            (it.code ? `<span class="hda-tag code">${escapeHtml(it.code)}</span>` : '') +
+            '</div></div>';
+  }
+  return html;
+}
+
+async function hdaRefresh(dateStr) {
+  hdaCurrentDate = dateStr;
+  document.getElementById('hdaDateText').textContent = formatDateLabel(dateStr);
+  const picker = document.getElementById('hdaDatePicker');
+  if (picker) picker.value = dateStr;
+
+  const liveBody = document.getElementById('hdaLiveBody');
+  const dataBody = document.getElementById('hdaDataBody');
+  const regionBody = document.getElementById('hdaRegionBody');
+  liveBody.innerHTML = dataBody.innerHTML = '<div class="hda-empty">불러오는 중…</div>';
+
+  const nowMin = hdaNowMin(dateStr);
+  const [live, data] = await Promise.all([hdaLoadHd('live', dateStr), hdaLoadHd('data', dateStr)]);
+  liveBody.innerHTML = hdaRenderBroadcastCol(live, nowMin);
+  dataBody.innerHTML = hdaRenderBroadcastCol(data, nowMin);
+  regionBody.innerHTML = hdaRenderRegionCol(dateStr);
+}
+
+function hdaOpenModal() {
+  document.getElementById('hdaRegionInput').value = _hdaRegionStore.raw || '';
+  document.getElementById('hdaRegionModal').hidden = false;
+}
+function hdaCloseModal() {
+  document.getElementById('hdaRegionModal').hidden = true;
+}
+function hdaSaveFromModal() {
+  const raw = document.getElementById('hdaRegionInput').value;
+  const byDate = hdaParseRegionText(raw, new Date(hdaCurrentDate + 'T00:00:00').getFullYear());
+  _hdaRegionStore = { raw, byDate };
+  hdaSaveRegionStore(_hdaRegionStore);
+  hdaCloseModal();
+  // 저장 후 현재 날짜 데이터영역만 다시 그림
+  document.getElementById('hdaRegionBody').innerHTML = hdaRenderRegionCol(hdaCurrentDate);
+  const total = Object.values(byDate).reduce((a, arr) => a + arr.length, 0);
+  const days = Object.keys(byDate).length;
+  if (total === 0) {
+    alert('인식된 편성이 없습니다. 날짜(예: 6.22(월))와 항목이 탭/공백으로 구분됐는지 확인해 주세요.');
+  } else {
+    // 가벼운 확인 피드백
+    console.log(`[데이터영역] ${days}일 / ${total}건 저장됨`);
+  }
+}
+function hdaClearRegion() {
+  if (!confirm('저장된 데이터영역 편성을 모두 지울까요?')) return;
+  _hdaRegionStore = { raw: '', byDate: {} };
+  hdaSaveRegionStore(_hdaRegionStore);
+  document.getElementById('hdaRegionInput').value = '';
+  document.getElementById('hdaRegionBody').innerHTML = hdaRenderRegionCol(hdaCurrentDate);
+}
+
 function switchTab(tab) {
-  const panels = { schedule: 'tabSchedule', weather: 'tabWeather', homeshop: 'tabHomeshop' };
-  const btns = { schedule: 'tabBtnSchedule', weather: 'tabBtnWeather', homeshop: 'tabBtnHomeshop' };
+  const panels = { schedule: 'tabSchedule', weather: 'tabWeather', homeshop: 'tabHomeshop', hdAll: 'tabHdAll' };
+  const btns = { schedule: 'tabBtnSchedule', weather: 'tabBtnWeather', homeshop: 'tabBtnHomeshop', hdAll: 'tabBtnHdAll' };
 
   for (const key in panels) {
     document.getElementById(panels[key]).classList.toggle('active', key === tab);
@@ -1603,6 +2056,10 @@ function switchTab(tab) {
   if (tab === 'homeshop' && !_homeshopTabLoaded) {
     _homeshopTabLoaded = true;
     hsRefresh(hsCurrentDate);
+  }
+  if (tab === 'hdAll' && !_hdAllTabLoaded) {
+    _hdAllTabLoaded = true;
+    hdaRefresh(hdaCurrentDate);
   }
 }
 
@@ -1654,6 +2111,7 @@ function switchTab(tab) {
   document.getElementById('tabBtnSchedule').addEventListener('click', () => switchTab('schedule'));
   document.getElementById('tabBtnWeather').addEventListener('click', () => switchTab('weather'));
   document.getElementById('tabBtnHomeshop').addEventListener('click', () => switchTab('homeshop'));
+  document.getElementById('tabBtnHdAll').addEventListener('click', () => switchTab('hdAll'));
 
   // 홈쇼핑 탭: 날짜 이동
   const hsPicker = document.getElementById('hsDatePicker');
@@ -1681,6 +2139,33 @@ function switchTab(tab) {
       btn.classList.add('active');
       hsRefresh(hsCurrentDate);
     });
+  });
+
+  // ===== 현대홈쇼핑 전체 탭 =====
+  hdaCurrentDate = hsCurrentDate;  // 오늘로 동기화
+  _hdaRegionStore = hdaLoadRegionStore();
+  if (!_hdaRegionStore || typeof _hdaRegionStore !== 'object' || !('byDate' in _hdaRegionStore)) {
+    _hdaRegionStore = { raw: '', byDate: {} };
+  }
+  const hdaPicker = document.getElementById('hdaDatePicker');
+  hdaPicker.value = hdaCurrentDate;
+  document.getElementById('hdaPrevDay').addEventListener('click', () => {
+    hdaCurrentDate = shiftDate(hdaCurrentDate, -1);
+    hdaRefresh(hdaCurrentDate);
+  });
+  document.getElementById('hdaNextDay').addEventListener('click', () => {
+    hdaCurrentDate = shiftDate(hdaCurrentDate, 1);
+    hdaRefresh(hdaCurrentDate);
+  });
+  hdaPicker.addEventListener('change', () => {
+    hdaRefresh(hdaPicker.value);
+  });
+  document.getElementById('hdaRegionEditBtn').addEventListener('click', hdaOpenModal);
+  document.getElementById('hdaRegionClose').addEventListener('click', hdaCloseModal);
+  document.getElementById('hdaRegionSave').addEventListener('click', hdaSaveFromModal);
+  document.getElementById('hdaRegionClear').addEventListener('click', hdaClearRegion);
+  document.getElementById('hdaRegionModal').addEventListener('click', (e) => {
+    if (e.target.id === 'hdaRegionModal') hdaCloseModal();  // 배경 클릭 시 닫기
   });
 
   // 날씨 탭 내 월 이동
